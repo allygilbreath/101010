@@ -1,19 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
-    <link rel="stylesheet" href="screen.css">
-  </head>
-  <body>
-    <h1>Home</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="about.html">About</a></li>
-      </ul>
-    </nav>
-    <script src="index.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Challenge 10: Robot Language</title>
+  <link rel="stylesheet" href="screen.css" />
+</head>
+<h1> Robot Language - Challenge 10 </h1>
+<body>
+  <div id="post-container">Loading post...</div>
+  <script>
+    console.log("Inline JS is running");
+  
+    fetch('https://jsonplaceholder.typicode.com/posts/1')
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(json) {
+        var postContainer = document.getElementById('post-container');
+        postContainer.className = 'post';
+        postContainer.innerHTML =
+          '<h1>' + json.title + '</h1>' +
+          '<p>' + json.body + '</p>';
+      })
+      .catch(function(error) {
+        console.error("Fetch failed:", error);
+      });
+  </script>
+</body>
 </html>

@@ -1,17 +1,20 @@
-console.log("JS is connected");
-
-fetch('https://jsonplaceholder.typicode.com/posts/1')
+fetch('https://jsonplaceholder.typicode.com/posts')
   .then(function(response) {
-    console.log("Fetch response received");
     return response.json();
   })
   .then(function(json) {
-    console.log("Got this from API:", json);
     var postContainer = document.getElementById('post-container');
-    postContainer.className = 'post';
-    postContainer.innerHTML =
-      '<h1>' + json.title + '</h1>' +
-      '<p>' + json.body + '</p>';
+    postContainer.innerHTML = ""; // clear the loading text
+
+    for (var i = 0; i < 5; i++) {
+      var post = json[i];
+      var postDiv = document.createElement('div');
+      postDiv.className = 'post';
+      postDiv.innerHTML =
+        '<h2>' + post.title + '</h2>' +
+        '<p>' + post.body + '</p>';
+      postContainer.appendChild(postDiv);
+    }
   })
   .catch(function(error) {
     console.error("Fetch failed:", error);
